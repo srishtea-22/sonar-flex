@@ -33,6 +33,7 @@ public enum FlexPunctuator implements GrammarRuleKey {
   LPARENTHESIS("("),
   RPARENTHESIS(")"),
   STAR("*"),
+  STAR_ASSIGN("*="),
   PLUS("+"),
   MINUS("-"),
   DOUBLE_PLUS("++"),
@@ -66,6 +67,7 @@ public enum FlexPunctuator implements GrammarRuleKey {
   GT(">"),
   LE("<="),
   GE(">="),
+  ARROW("->"),
   AND("&"),
   ANDAND("&&"),
   XOR("^"),
@@ -74,7 +76,11 @@ public enum FlexPunctuator implements GrammarRuleKey {
   QUERY("?"),
   TILD("~"),
   TRIPLE_DOTS("..."),
-  SEMICOLON(";");
+  SEMICOLON(";"),
+  REST("..."),
+  HASH("#"),
+  HASHHASH("##"),
+  SIZEOF("sizeof");
 
   private final String value;
 

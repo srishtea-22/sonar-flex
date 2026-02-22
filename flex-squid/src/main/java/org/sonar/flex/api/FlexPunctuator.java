@@ -46,16 +46,15 @@ public enum FlexPunctuator implements TokenType {
   MINUS_ASSIGN("-="),
   DEC("--"),
   STAR("*"),
-  // was replaced by grammar rule
-  // STAR_ASSIGN("*="),
+  STAR_ASSIGN("*="),
   MOD("%"),
   MOD_ASSIGN("%="),
+  ARROW("->"),
   SR(">>"),
   SR_ASSIGN(">>="),
   BSR(">>>"),
   BSR_ASSIGN(">>>="),
-  // was replaced by grammar rule
-  // GE(">="),
+  GE(">="),
   GT(">"),
   SL("<<"),
   SL_ASSIGN("<<="),
@@ -74,7 +73,10 @@ public enum FlexPunctuator implements TokenType {
   E4X_ATTRI("@"),
   SEMI(";"),
   DOT("."),
-  REST("...");
+  REST("..."),
+  HASH("#"),
+  HASHHASH("##"),
+  SIZEOF("sizeof");
 
   private final String value;
 
