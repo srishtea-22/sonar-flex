@@ -18,7 +18,7 @@ package org.sonar.flex;
 
 import org.sonar.sslr.grammar.GrammarRuleKey;
 
-public enum FlexPunctuator implements GrammarRuleKey {
+public enum CPunctuator implements GrammarRuleKey {
 
   AT_SIGN("@"),
   COMMA(","),
@@ -84,7 +84,7 @@ public enum FlexPunctuator implements GrammarRuleKey {
 
   private final String value;
 
-  FlexPunctuator(String value) {
+  CPunctuator(String value) {
     this.value = value;
   }
 
