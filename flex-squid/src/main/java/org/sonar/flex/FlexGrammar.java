@@ -299,6 +299,7 @@ public enum FlexGrammar implements GrammarRuleKey {
   FUNCTION_COMMON,
   FUNCTION_SIGNATURE,
   RESULT_TYPE,
+  RETURN_TYPE,
   PARAMETERS,
   PARAMETER,
   REST_PARAMETERS,
@@ -809,7 +810,7 @@ public enum FlexGrammar implements GrammarRuleKey {
 
     b.rule(IMPORT_DIRECTIVE).is(IMPORT, PACKAGE_NAME, b.optional(DOT, STAR));
 
-    b.rule(INCLUDE_DIRECTIVE).is(INCLUDE, /* No line break */ SPACING_NO_LB, NEXT_NOT_LB, STRING);
+    b.rule(INCLUDE_DIRECTIVE).is(HASH, INCLUDE, SPACING_NO_LB, NEXT_NOT_LB, b.firstOf(STRING, b.sequence(LT, b.regexp("[^>\\r\\n]++"), GT)));
 
     b.rule(USE_DIRECTIVE).is(USE, NAMESPACE, LIST_EXPRESSION);
 
@@ -846,11 +847,21 @@ public enum FlexGrammar implements GrammarRuleKey {
       b.sequence(IDENTIFIER, COLON, TYPE_EXPR_NO_IN),
       IDENTIFIER));
 
-    b.rule(FUNCTION_DEF).is(FUNCTION, FUNCTION_NAME, FUNCTION_COMMON);
-    b.rule(FUNCTION_NAME).is(b.firstOf(
-      b.sequence(GET, /* No line break */ SPACING_NO_LB, NEXT_NOT_LB, IDENTIFIER),
-      b.sequence(SET, /* No line break */ SPACING_NO_LB, NEXT_NOT_LB, IDENTIFIER),
-      IDENTIFIER));
+    b.rule(FUNCTION_DEF).is(RETURN_TYPE, FUNCTION_NAME, FUNCTION_COMMON);
+    b.rule(RETURN_TYPE).is(
+      b.firstOf(
+        VOID,
+        INT,
+        CHAR,
+        FLOAT,
+        DOUBLE,
+        UNSIGNED,
+        SIGNED,
+        LONG,
+        SHORT
+      )
+    );
+    b.rule(FUNCTION_NAME).is(IDENTIFIER);
 
     b.rule(FUNCTION_COMMON).is(b.firstOf(
       b.sequence(FUNCTION_SIGNATURE, BLOCK),
@@ -893,12 +904,19 @@ public enum FlexGrammar implements GrammarRuleKey {
     b.rule(NAMESPACE_BINDING).is(IDENTIFIER, b.optional(NAMESPACE_INITIALISATION));
     b.rule(NAMESPACE_INITIALISATION).is(EQUAL1, ASSIGNMENT_EXPR);
 
-    b.rule(PROGRAM).is(
+   /*  b.rule(PROGRAM).is(
       b.firstOf(
         b.sequence(PACKAGE_DEF, PROGRAM),
         DIRECTIVES),
       SPACING,
-      b.token(GenericTokenType.EOF, b.endOfInput()));
+      b.token(GenericTokenType.EOF, b.endOfInput())); */
+
+    b.rule(PROGRAM).is(
+      b.zeroOrMore(INCLUDE_DIRECTIVE),
+      b.zeroOrMore(FUNCTION_DEF),
+      SPACING,
+      b.token(GenericTokenType.EOF, b.endOfInput())
+    );
   }
 
   private static void xml(LexerlessGrammarBuilder b) {
