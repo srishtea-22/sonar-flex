@@ -289,6 +289,8 @@ public enum FlexGrammar implements GrammarRuleKey {
   VARIABLE_BINDING_NO_IN,
   VARIABLE_INITIALISATION,
   VARIABLE_INITIALISATION_NO_IN,
+  TYPE_QUALIFIER,
+  TYPE_SPECIFIER,
   TYPED_IDENTIFIER,
   TYPED_IDENTIFIER_NO_IN,
   VARIABLE_INITIALISER,
@@ -299,7 +301,6 @@ public enum FlexGrammar implements GrammarRuleKey {
   FUNCTION_COMMON,
   FUNCTION_SIGNATURE,
   RESULT_TYPE,
-  RETURN_TYPE,
   PARAMETERS,
   PARAMETER,
   REST_PARAMETERS,
@@ -819,7 +820,7 @@ public enum FlexGrammar implements GrammarRuleKey {
   }
 
   private static void definitions(LexerlessGrammarBuilder b) {
-    b.rule(VARIABLE_DEF).is(VARIABLE_DEF_KIND, VARIABLE_BINDING_LIST);
+    b.rule(VARIABLE_DEF).is(b.optional(TYPE_QUALIFIER), TYPE_SPECIFIER, VARIABLE_BINDING_LIST, EOS);
     b.rule(VARIABLE_DEF_NO_IN).is(VARIABLE_DEF_KIND, VARIABLE_BINDING_LIST_NO_IN);
 
     b.rule(VARIABLE_DEF_KIND).is(b.firstOf(VAR, CONST));
@@ -847,8 +848,8 @@ public enum FlexGrammar implements GrammarRuleKey {
       b.sequence(IDENTIFIER, COLON, TYPE_EXPR_NO_IN),
       IDENTIFIER));
 
-    b.rule(FUNCTION_DEF).is(RETURN_TYPE, FUNCTION_NAME, FUNCTION_COMMON);
-    b.rule(RETURN_TYPE).is(
+    b.rule(FUNCTION_DEF).is(TYPE_SPECIFIER, FUNCTION_NAME, FUNCTION_COMMON);
+    b.rule(TYPE_SPECIFIER).is(
       b.firstOf(
         VOID,
         INT,
@@ -861,6 +862,7 @@ public enum FlexGrammar implements GrammarRuleKey {
         SHORT
       )
     );
+    b.rule(TYPE_QUALIFIER).is(CONST, STATIC, EXTERN);
     b.rule(FUNCTION_NAME).is(IDENTIFIER);
 
     b.rule(FUNCTION_COMMON).is(b.firstOf(
