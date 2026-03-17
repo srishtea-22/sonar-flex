@@ -32,53 +32,80 @@ import com.sonar.sslr.api.TokenType;
  * override
  * static
  */
-public enum FlexKeyword implements TokenType {
+public enum CKeyword implements TokenType {
   // "as" is not a keyword in ActionScript 2, so we treat it as syntactic keyword to permit usage as identifier - see SONARPLUGINS-2072
   // AS("as"),
+  
+  ASM("asm"),
+  AUTO("auto"),
   BREAK("break"),
   CASE("case"),
   CATCH("catch"),
+  CHAR("char"),
   CLASS("class"),
   CONST("const"),
   CONTINUE("continue"),
   DEFAULT("default"),
   DELETE("delete"),
   DO("do"),
+  DOUBLE("double"),
   ELSE("else"),
+  ENUM("enum"),
   EXTENDS("extends"),
+  EXTERN("extern"),
   FALSE("false"),
+  __FAR("__far"),
   FINALLY("finally"),
+  FLOAT("float"),
   FOR("for"),
   FUNCTION("function"),
+  GOTO("goto"),
   IF("if"),
   IMPLEMENTS("implements"),
   IMPORT("import"),
   IN("in"),
+  INLINE("inline"),
   INSTANCEOF("instanceof"),
+  INT("int"),
   INTERFACE("interface"),
   INTERNAL("internal"),
   IS("is"),
+  LONG("long"),
+  __NEAR("__near"),
   NEW("new"),
   NULL("null"),
   PACKAGE("package"),
   PRIVATE("private"),
   PROTECTED("protected"),
   PUBLIC("public"),
+  REGISTER("register"),
   RETURN("return"),
+  SHORT("short"),
+  SIGNED("signed"),
+  SIZEOF("sizeof"),
+  __STACK_NUMBER__("__stack_number__"),
+  STATIC("static"),
+  STRUCT("struct"),
   SWITCH("switch"),
   THROW("throw"),
   TRUE("true"),
   TRY("try"),
+  TYPEDEF("typedef"),
   TYPEOF("typeof"),
+  UNION("union"),
+  UNSIGNED("unsigned"),
   USE("use"),
+  __USER_LOCK__("__user_lock__"),
+  __USER_UNLOCK__("__user_unlock__"),
   VAR("var"),
   VOID("void"),
+  VOLATILE("volatile"),
   WHILE("while"),
   WITH("with");
 
   private final String value;
 
-  FlexKeyword(String value) {
+  CKeyword(String value) {
     this.value = value;
   }
 
@@ -98,7 +125,7 @@ public enum FlexKeyword implements TokenType {
   }
 
   public static String[] keywordValues() {
-    FlexKeyword[] keywordsEnum = FlexKeyword.values();
+    CKeyword[] keywordsEnum = CKeyword.values();
     String[] keywords = new String[keywordsEnum.length];
     for (int i = 0; i < keywords.length; i++) {
       keywords[i] = keywordsEnum[i].getValue();

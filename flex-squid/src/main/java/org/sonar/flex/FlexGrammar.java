@@ -23,112 +23,140 @@ import org.sonar.sslr.parser.LexerlessGrammar;
 
 import java.util.List;
 
-import static org.sonar.flex.FlexKeyword.AS;
-import static org.sonar.flex.FlexKeyword.BREAK;
-import static org.sonar.flex.FlexKeyword.CASE;
-import static org.sonar.flex.FlexKeyword.CATCH;
-import static org.sonar.flex.FlexKeyword.CLASS;
-import static org.sonar.flex.FlexKeyword.CONST;
-import static org.sonar.flex.FlexKeyword.CONTINUE;
-import static org.sonar.flex.FlexKeyword.DEFAULT;
-import static org.sonar.flex.FlexKeyword.DELETE;
-import static org.sonar.flex.FlexKeyword.DO;
-import static org.sonar.flex.FlexKeyword.DYNAMIC;
-import static org.sonar.flex.FlexKeyword.EACH;
-import static org.sonar.flex.FlexKeyword.ELSE;
-import static org.sonar.flex.FlexKeyword.EXTENDS;
-import static org.sonar.flex.FlexKeyword.FALSE;
-import static org.sonar.flex.FlexKeyword.FINALLY;
-import static org.sonar.flex.FlexKeyword.FOR;
-import static org.sonar.flex.FlexKeyword.FUNCTION;
-import static org.sonar.flex.FlexKeyword.GET;
-import static org.sonar.flex.FlexKeyword.IF;
-import static org.sonar.flex.FlexKeyword.IMPLEMENTS;
-import static org.sonar.flex.FlexKeyword.IMPORT;
-import static org.sonar.flex.FlexKeyword.IN;
-import static org.sonar.flex.FlexKeyword.INCLUDE;
-import static org.sonar.flex.FlexKeyword.INSTANCEOF;
-import static org.sonar.flex.FlexKeyword.INTERFACE;
-import static org.sonar.flex.FlexKeyword.INTERNAL;
-import static org.sonar.flex.FlexKeyword.IS;
-import static org.sonar.flex.FlexKeyword.NAMESPACE;
-import static org.sonar.flex.FlexKeyword.NEW;
-import static org.sonar.flex.FlexKeyword.NULL;
-import static org.sonar.flex.FlexKeyword.PACKAGE;
-import static org.sonar.flex.FlexKeyword.PRIVATE;
-import static org.sonar.flex.FlexKeyword.PROTECTED;
-import static org.sonar.flex.FlexKeyword.PUBLIC;
-import static org.sonar.flex.FlexKeyword.RETURN;
-import static org.sonar.flex.FlexKeyword.SET;
-import static org.sonar.flex.FlexKeyword.STATIC;
-import static org.sonar.flex.FlexKeyword.SUPER;
-import static org.sonar.flex.FlexKeyword.SWITCH;
-import static org.sonar.flex.FlexKeyword.THIS;
-import static org.sonar.flex.FlexKeyword.THROW;
-import static org.sonar.flex.FlexKeyword.TRUE;
-import static org.sonar.flex.FlexKeyword.TRY;
-import static org.sonar.flex.FlexKeyword.TYPEOF;
-import static org.sonar.flex.FlexKeyword.USE;
-import static org.sonar.flex.FlexKeyword.VAR;
-import static org.sonar.flex.FlexKeyword.VOID;
-import static org.sonar.flex.FlexKeyword.WHILE;
-import static org.sonar.flex.FlexKeyword.WITH;
-import static org.sonar.flex.FlexKeyword.XML;
-import static org.sonar.flex.FlexPunctuator.AND;
-import static org.sonar.flex.FlexPunctuator.ANDAND;
-import static org.sonar.flex.FlexPunctuator.ANDAND_EQU;
-import static org.sonar.flex.FlexPunctuator.AND_EQU;
-import static org.sonar.flex.FlexPunctuator.AT_SIGN;
-import static org.sonar.flex.FlexPunctuator.COLON;
-import static org.sonar.flex.FlexPunctuator.COMMA;
-import static org.sonar.flex.FlexPunctuator.DIV;
-import static org.sonar.flex.FlexPunctuator.DIV_EQU;
-import static org.sonar.flex.FlexPunctuator.DOT;
-import static org.sonar.flex.FlexPunctuator.DOUBLE_COLON;
-import static org.sonar.flex.FlexPunctuator.DOUBLE_DOT;
-import static org.sonar.flex.FlexPunctuator.DOUBLE_MINUS;
-import static org.sonar.flex.FlexPunctuator.DOUBLE_PLUS;
-import static org.sonar.flex.FlexPunctuator.EQUAL1;
-import static org.sonar.flex.FlexPunctuator.EQUAL2;
-import static org.sonar.flex.FlexPunctuator.EQUAL3;
-import static org.sonar.flex.FlexPunctuator.GE;
-import static org.sonar.flex.FlexPunctuator.GT;
-import static org.sonar.flex.FlexPunctuator.LBRAKET;
-import static org.sonar.flex.FlexPunctuator.LCURLYBRACE;
-import static org.sonar.flex.FlexPunctuator.LE;
-import static org.sonar.flex.FlexPunctuator.LPARENTHESIS;
-import static org.sonar.flex.FlexPunctuator.LT;
-import static org.sonar.flex.FlexPunctuator.MINUS;
-import static org.sonar.flex.FlexPunctuator.MINUS_EQU;
-import static org.sonar.flex.FlexPunctuator.MOD;
-import static org.sonar.flex.FlexPunctuator.MOD_EQU;
-import static org.sonar.flex.FlexPunctuator.NOT;
-import static org.sonar.flex.FlexPunctuator.NOTEQUAL1;
-import static org.sonar.flex.FlexPunctuator.NOTEQUAL2;
-import static org.sonar.flex.FlexPunctuator.OR;
-import static org.sonar.flex.FlexPunctuator.OROR;
-import static org.sonar.flex.FlexPunctuator.OROR_EQU;
-import static org.sonar.flex.FlexPunctuator.OR_EQU;
-import static org.sonar.flex.FlexPunctuator.PLUS;
-import static org.sonar.flex.FlexPunctuator.PLUS_EQU;
-import static org.sonar.flex.FlexPunctuator.QUERY;
-import static org.sonar.flex.FlexPunctuator.RBRAKET;
-import static org.sonar.flex.FlexPunctuator.RCURLYBRACE;
-import static org.sonar.flex.FlexPunctuator.RPARENTHESIS;
-import static org.sonar.flex.FlexPunctuator.SEMICOLON;
-import static org.sonar.flex.FlexPunctuator.SL;
-import static org.sonar.flex.FlexPunctuator.SL_EQU;
-import static org.sonar.flex.FlexPunctuator.SR;
-import static org.sonar.flex.FlexPunctuator.SR2;
-import static org.sonar.flex.FlexPunctuator.SR_EQU;
-import static org.sonar.flex.FlexPunctuator.SR_EQU2;
-import static org.sonar.flex.FlexPunctuator.STAR;
-import static org.sonar.flex.FlexPunctuator.STAR_EQU;
-import static org.sonar.flex.FlexPunctuator.TILD;
-import static org.sonar.flex.FlexPunctuator.TRIPLE_DOTS;
-import static org.sonar.flex.FlexPunctuator.XOR;
-import static org.sonar.flex.FlexPunctuator.XORXOR_EQU;
-import static org.sonar.flex.FlexPunctuator.XOR_EQU;
+import static org.sonar.flex.CKeyword.AS;
+import static org.sonar.flex.CKeyword.ASM;
+import static org.sonar.flex.CKeyword.BREAK;
+import static org.sonar.flex.CKeyword.CASE;
+import static org.sonar.flex.CKeyword.CATCH;
+import static org.sonar.flex.CKeyword.CHAR;
+import static org.sonar.flex.CKeyword.CLASS;
+import static org.sonar.flex.CKeyword.CONST;
+import static org.sonar.flex.CKeyword.CONTINUE;
+import static org.sonar.flex.CKeyword.DEFAULT;
+import static org.sonar.flex.CKeyword.DELETE;
+import static org.sonar.flex.CKeyword.DO;
+import static org.sonar.flex.CKeyword.DOUBLE;
+import static org.sonar.flex.CKeyword.DYNAMIC;
+import static org.sonar.flex.CKeyword.EACH;
+import static org.sonar.flex.CKeyword.ELSE;
+import static org.sonar.flex.CKeyword.EXTENDS;
+import static org.sonar.flex.CKeyword.EXTERN;
+import static org.sonar.flex.CKeyword.FALSE;
+import static org.sonar.flex.CKeyword.__FAR;
+import static org.sonar.flex.CKeyword.FINALLY;
+import static org.sonar.flex.CKeyword.FLOAT;
+import static org.sonar.flex.CKeyword.FOR;
+import static org.sonar.flex.CKeyword.FUNCTION;
+import static org.sonar.flex.CKeyword.GET;
+import static org.sonar.flex.CKeyword.GOTO;
+import static org.sonar.flex.CKeyword.IF;
+import static org.sonar.flex.CKeyword.IMPLEMENTS;
+import static org.sonar.flex.CKeyword.IMPORT;
+import static org.sonar.flex.CKeyword.IN;
+import static org.sonar.flex.CKeyword.INCLUDE;
+import static org.sonar.flex.CKeyword.INLINE;
+import static org.sonar.flex.CKeyword.INSTANCEOF;
+import static org.sonar.flex.CKeyword.INT;
+import static org.sonar.flex.CKeyword.INTERFACE;
+import static org.sonar.flex.CKeyword.INTERNAL;
+import static org.sonar.flex.CKeyword.IS;
+import static org.sonar.flex.CKeyword.LONG;
+import static org.sonar.flex.CKeyword.NAMESPACE;
+import static org.sonar.flex.CKeyword.__NEAR;
+import static org.sonar.flex.CKeyword.NEW;
+import static org.sonar.flex.CKeyword.NULL;
+import static org.sonar.flex.CKeyword.PACKAGE;
+import static org.sonar.flex.CKeyword.PRIVATE;
+import static org.sonar.flex.CKeyword.PROTECTED;
+import static org.sonar.flex.CKeyword.PUBLIC;
+import static org.sonar.flex.CKeyword.REGISTER;
+import static org.sonar.flex.CKeyword.RETURN;
+import static org.sonar.flex.CKeyword.SET;
+import static org.sonar.flex.CKeyword.SHORT;
+import static org.sonar.flex.CKeyword.SIGNED;
+import static org.sonar.flex.CKeyword.SIZEOF;
+import static org.sonar.flex.CKeyword.__STACK_NUMBER__;
+import static org.sonar.flex.CKeyword.STATIC;
+import static org.sonar.flex.CKeyword.SUPER;
+import static org.sonar.flex.CKeyword.SWITCH;
+import static org.sonar.flex.CKeyword.THIS;
+import static org.sonar.flex.CKeyword.THROW;
+import static org.sonar.flex.CKeyword.TRUE;
+import static org.sonar.flex.CKeyword.TRY;
+import static org.sonar.flex.CKeyword.TYPEDEF;
+import static org.sonar.flex.CKeyword.TYPEOF;
+import static org.sonar.flex.CKeyword.UNION;
+import static org.sonar.flex.CKeyword.UNSIGNED;
+import static org.sonar.flex.CKeyword.USE;
+import static org.sonar.flex.CKeyword.__USER_LOCK__;
+import static org.sonar.flex.CKeyword.__USER_UNLOCK__;
+import static org.sonar.flex.CKeyword.VAR;
+import static org.sonar.flex.CKeyword.VOID;
+import static org.sonar.flex.CKeyword.VOLATILE;
+import static org.sonar.flex.CKeyword.WHILE;
+import static org.sonar.flex.CKeyword.WITH;
+import static org.sonar.flex.CKeyword.XML;
+import static org.sonar.flex.CPunctuator.AND;
+import static org.sonar.flex.CPunctuator.ANDAND;
+import static org.sonar.flex.CPunctuator.ANDAND_EQU;
+import static org.sonar.flex.CPunctuator.AND_EQU;
+import static org.sonar.flex.CPunctuator.ARROW;
+import static org.sonar.flex.CPunctuator.AT_SIGN;
+import static org.sonar.flex.CPunctuator.COLON;
+import static org.sonar.flex.CPunctuator.COMMA;
+import static org.sonar.flex.CPunctuator.DIV;
+import static org.sonar.flex.CPunctuator.DIV_EQU;
+import static org.sonar.flex.CPunctuator.DOT;
+import static org.sonar.flex.CPunctuator.DOUBLE_COLON;
+import static org.sonar.flex.CPunctuator.DOUBLE_DOT;
+import static org.sonar.flex.CPunctuator.DOUBLE_MINUS;
+import static org.sonar.flex.CPunctuator.DOUBLE_PLUS;
+import static org.sonar.flex.CPunctuator.EQUAL1;
+import static org.sonar.flex.CPunctuator.EQUAL2;
+import static org.sonar.flex.CPunctuator.EQUAL3;
+import static org.sonar.flex.CPunctuator.GE;
+import static org.sonar.flex.CPunctuator.GT;
+import static org.sonar.flex.CPunctuator.HASH;
+import static org.sonar.flex.CPunctuator.HASHHASH;
+import static org.sonar.flex.CPunctuator.LBRAKET;
+import static org.sonar.flex.CPunctuator.LCURLYBRACE;
+import static org.sonar.flex.CPunctuator.LE;
+import static org.sonar.flex.CPunctuator.LPARENTHESIS;
+import static org.sonar.flex.CPunctuator.LT;
+import static org.sonar.flex.CPunctuator.MINUS;
+import static org.sonar.flex.CPunctuator.MINUS_EQU;
+import static org.sonar.flex.CPunctuator.MOD;
+import static org.sonar.flex.CPunctuator.MOD_EQU;
+import static org.sonar.flex.CPunctuator.NOT;
+import static org.sonar.flex.CPunctuator.NOTEQUAL1;
+import static org.sonar.flex.CPunctuator.NOTEQUAL2;
+import static org.sonar.flex.CPunctuator.OR;
+import static org.sonar.flex.CPunctuator.OROR;
+import static org.sonar.flex.CPunctuator.OROR_EQU;
+import static org.sonar.flex.CPunctuator.OR_EQU;
+import static org.sonar.flex.CPunctuator.PLUS;
+import static org.sonar.flex.CPunctuator.PLUS_EQU;
+import static org.sonar.flex.CPunctuator.QUERY;
+import static org.sonar.flex.CPunctuator.RBRAKET;
+import static org.sonar.flex.CPunctuator.RCURLYBRACE;
+import static org.sonar.flex.CPunctuator.REST;
+import static org.sonar.flex.CPunctuator.RPARENTHESIS;
+import static org.sonar.flex.CPunctuator.SEMICOLON;
+import static org.sonar.flex.CPunctuator.SIZEOF;
+import static org.sonar.flex.CPunctuator.SL;
+import static org.sonar.flex.CPunctuator.SL_EQU;
+import static org.sonar.flex.CPunctuator.SR;
+import static org.sonar.flex.CPunctuator.SR2;
+import static org.sonar.flex.CPunctuator.SR_EQU;
+import static org.sonar.flex.CPunctuator.SR_EQU2;
+import static org.sonar.flex.CPunctuator.STAR;
+import static org.sonar.flex.CPunctuator.STAR_ASSIGN;
+import static org.sonar.flex.CPunctuator.STAR_EQU;
+import static org.sonar.flex.CPunctuator.TILD;
+import static org.sonar.flex.CPunctuator.TRIPLE_DOTS;
+import static org.sonar.flex.CPunctuator.XOR;
+import static org.sonar.flex.CPunctuator.XORXOR_EQU;
+import static org.sonar.flex.CPunctuator.XOR_EQU;
 
 public enum FlexGrammar implements GrammarRuleKey {
 
@@ -245,6 +273,14 @@ public enum FlexGrammar implements GrammarRuleKey {
   XML_PI,
   KEYWORDS,
   REGULAR_EXPRESSION,
+
+  /**
+   * BUILT-IN PREDEFINED FUNCTION NAMES
+   * stdio.h : fopen, fread, fwrite, fclose, printf, scanf
+   * math.h  : all standard C math functions
+   */
+  STDIO_FUNCTION_NAME,
+  MATH_FUNCTION_NAME,
   // </editor-fold>
 
   /**
@@ -261,6 +297,8 @@ public enum FlexGrammar implements GrammarRuleKey {
   VARIABLE_BINDING_NO_IN,
   VARIABLE_INITIALISATION,
   VARIABLE_INITIALISATION_NO_IN,
+  TYPE_QUALIFIER,
+  TYPE_SPECIFIER,
   TYPED_IDENTIFIER,
   TYPED_IDENTIFIER_NO_IN,
   VARIABLE_INITIALISER,
@@ -500,6 +538,9 @@ public enum FlexGrammar implements GrammarRuleKey {
       THIS,
       REGULAR_EXPRESSION,
       XML_INITIALISER,
+      // Built-in predefined function names recognised before generic identifier
+      STDIO_FUNCTION_NAME,
+      MATH_FUNCTION_NAME,
       QUALIFIED_IDENTIFIER,
       RESERVED_NAMESPACE,
       PARENTHESIZED_EXPR,
@@ -660,6 +701,89 @@ public enum FlexGrammar implements GrammarRuleKey {
     b.rule(TYPE_EXPR_NO_IN).is(TYPE_EXPR);
 
     b.rule(VECTOR_LITERAL_EXPRESSION).is(LT, TYPE_EXPR, GT, BRACKETS);
+
+    // -------------------------------------------------------------------------
+    // stdio.h  predefined function names
+    // -------------------------------------------------------------------------
+    b.rule(STDIO_FUNCTION_NAME).is(SPACING, b.firstOf(
+      b.sequence("fopen",  b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fread",  b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fwrite", b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fclose", b.nextNot(IDENTIFIER_PART)),
+      b.sequence("printf", b.nextNot(IDENTIFIER_PART)),
+      b.sequence("scanf",  b.nextNot(IDENTIFIER_PART))
+    ));
+
+    // -------------------------------------------------------------------------
+    // math.h   predefined function names  (full C99 / POSIX set)
+    // -------------------------------------------------------------------------
+    b.rule(MATH_FUNCTION_NAME).is(SPACING, b.firstOf(
+      // Trigonometric
+      b.sequence("acos",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("acosh",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("asin",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("asinh",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("atan2",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("atan",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("atanh",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("cos",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("cosh",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("sin",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("sinh",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("tan",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("tanh",       b.nextNot(IDENTIFIER_PART)),
+      // Exponential & logarithmic
+      b.sequence("exp2",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("exp",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("expm1",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("frexp",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("ilogb",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("ldexp",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("lgamma",     b.nextNot(IDENTIFIER_PART)),
+      b.sequence("log10",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("log1p",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("log2",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("logb",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("log",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("modf",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("scalbn",     b.nextNot(IDENTIFIER_PART)),
+      b.sequence("scalbln",    b.nextNot(IDENTIFIER_PART)),
+      b.sequence("tgamma",     b.nextNot(IDENTIFIER_PART)),
+      // Power & absolute value
+      b.sequence("cbrt",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fabs",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("hypot",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("pow",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("sqrt",       b.nextNot(IDENTIFIER_PART)),
+      // Integer variants (keep longer alternatives first to avoid partial match)
+      b.sequence("llrint",     b.nextNot(IDENTIFIER_PART)),
+      b.sequence("llround",    b.nextNot(IDENTIFIER_PART)),
+      b.sequence("lrint",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("lround",     b.nextNot(IDENTIFIER_PART)),
+      // Rounding
+      b.sequence("ceil",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("floor",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("nearbyint",  b.nextNot(IDENTIFIER_PART)),
+      b.sequence("nextafter",  b.nextNot(IDENTIFIER_PART)),
+      b.sequence("nexttoward", b.nextNot(IDENTIFIER_PART)),
+      b.sequence("rint",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("round",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("trunc",      b.nextNot(IDENTIFIER_PART)),
+      // Floating-point manipulation
+      b.sequence("copysign",   b.nextNot(IDENTIFIER_PART)),
+      b.sequence("erf",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("erfc",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fdim",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fma",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fmax",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fmin",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fmod",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("nan",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("remainder",  b.nextNot(IDENTIFIER_PART)),
+      b.sequence("remquo",     b.nextNot(IDENTIFIER_PART)),
+      // abs is last: short name, must not steal 'acos', 'asin' etc. (those listed above first)
+      b.sequence("abs",        b.nextNot(IDENTIFIER_PART))
+    ));
   }
 
   private static void statements(LexerlessGrammarBuilder b) {
@@ -781,7 +905,7 @@ public enum FlexGrammar implements GrammarRuleKey {
 
     b.rule(IMPORT_DIRECTIVE).is(IMPORT, PACKAGE_NAME, b.optional(DOT, STAR));
 
-    b.rule(INCLUDE_DIRECTIVE).is(INCLUDE, /* No line break */ SPACING_NO_LB, NEXT_NOT_LB, STRING);
+    b.rule(INCLUDE_DIRECTIVE).is(HASH, INCLUDE, SPACING_NO_LB, NEXT_NOT_LB, b.firstOf(STRING, b.sequence(LT, b.regexp("[^>\\r\\n]++"), GT)));
 
     b.rule(USE_DIRECTIVE).is(USE, NAMESPACE, LIST_EXPRESSION);
 
@@ -790,7 +914,7 @@ public enum FlexGrammar implements GrammarRuleKey {
   }
 
   private static void definitions(LexerlessGrammarBuilder b) {
-    b.rule(VARIABLE_DEF).is(VARIABLE_DEF_KIND, VARIABLE_BINDING_LIST);
+    b.rule(VARIABLE_DEF).is(b.optional(TYPE_QUALIFIER), TYPE_SPECIFIER, VARIABLE_BINDING_LIST, EOS);
     b.rule(VARIABLE_DEF_NO_IN).is(VARIABLE_DEF_KIND, VARIABLE_BINDING_LIST_NO_IN);
 
     b.rule(VARIABLE_DEF_KIND).is(b.firstOf(VAR, CONST));
@@ -818,11 +942,22 @@ public enum FlexGrammar implements GrammarRuleKey {
       b.sequence(IDENTIFIER, COLON, TYPE_EXPR_NO_IN),
       IDENTIFIER));
 
-    b.rule(FUNCTION_DEF).is(FUNCTION, FUNCTION_NAME, FUNCTION_COMMON);
-    b.rule(FUNCTION_NAME).is(b.firstOf(
-      b.sequence(GET, /* No line break */ SPACING_NO_LB, NEXT_NOT_LB, IDENTIFIER),
-      b.sequence(SET, /* No line break */ SPACING_NO_LB, NEXT_NOT_LB, IDENTIFIER),
-      IDENTIFIER));
+    b.rule(FUNCTION_DEF).is(TYPE_SPECIFIER, FUNCTION_NAME, FUNCTION_COMMON);
+    b.rule(TYPE_SPECIFIER).is(
+      b.firstOf(
+        VOID,
+        INT,
+        CHAR,
+        FLOAT,
+        DOUBLE,
+        UNSIGNED,
+        SIGNED,
+        LONG,
+        SHORT
+      )
+    );
+    b.rule(TYPE_QUALIFIER).is(CONST, STATIC, EXTERN);
+    b.rule(FUNCTION_NAME).is(IDENTIFIER);
 
     b.rule(FUNCTION_COMMON).is(b.firstOf(
       b.sequence(FUNCTION_SIGNATURE, BLOCK),
@@ -865,12 +1000,19 @@ public enum FlexGrammar implements GrammarRuleKey {
     b.rule(NAMESPACE_BINDING).is(IDENTIFIER, b.optional(NAMESPACE_INITIALISATION));
     b.rule(NAMESPACE_INITIALISATION).is(EQUAL1, ASSIGNMENT_EXPR);
 
-    b.rule(PROGRAM).is(
+   /*  b.rule(PROGRAM).is(
       b.firstOf(
         b.sequence(PACKAGE_DEF, PROGRAM),
         DIRECTIVES),
       SPACING,
-      b.token(GenericTokenType.EOF, b.endOfInput()));
+      b.token(GenericTokenType.EOF, b.endOfInput())); */
+
+    b.rule(PROGRAM).is(
+      b.zeroOrMore(INCLUDE_DIRECTIVE),
+      b.zeroOrMore(FUNCTION_DEF),
+      SPACING,
+      b.token(GenericTokenType.EOF, b.endOfInput())
+    );
   }
 
   private static void xml(LexerlessGrammarBuilder b) {
@@ -924,11 +1066,11 @@ public enum FlexGrammar implements GrammarRuleKey {
   }
 
   private static void keywords(LexerlessGrammarBuilder b) {
-    for (FlexKeyword k : FlexKeyword.values()) {
+    for (CKeyword k : CKeyword.values()) {
       b.rule(k).is(SPACING, k.getValue(), b.nextNot(IDENTIFIER_PART));
     }
 
-    List<FlexKeyword> keywords = FlexKeyword.keywords();
+    List<CKeyword> keywords = CKeyword.keywords();
     Object[] rest = new Object[keywords.size() - 2];
     for (int i = 2; i < keywords.size(); i++) {
       rest[i - 2] = keywords.get(i);
@@ -937,7 +1079,7 @@ public enum FlexGrammar implements GrammarRuleKey {
   }
 
   private static void punctuators(LexerlessGrammarBuilder b) {
-    for (FlexPunctuator p : FlexPunctuator.values()) {
+    for (CPunctuator p : CPunctuator.values()) {
       b.rule(p).is(SPACING, p.getValue());
     }
   }

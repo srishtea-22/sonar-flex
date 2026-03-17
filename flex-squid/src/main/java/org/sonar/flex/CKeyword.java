@@ -23,52 +23,77 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 import org.sonar.sslr.grammar.GrammarRuleKey;
 
-public enum FlexKeyword implements GrammarRuleKey {
+public enum CKeyword implements GrammarRuleKey {
 
   /**
    * "as" is not keyword in ActionScript 2, so we treat it as syntactic keyword
    */
   AS(true),
+  ASM,
+  AUTO,
   BREAK,
   CASE,
   CATCH,
+  CHAR,
   CLASS,
   CONST,
   CONTINUE,
   DEFAULT,
   DELETE,
   DO,
+  DOUBLE,
   ELSE,
+  ENUM,
   EXTENDS,
+  EXTERN,
   FALSE,
+  __FAR,
   FINALLY,
+  FLOAT,
   FOR,
   FUNCTION,
+  GOTO,
   IF,
   IMPLEMENTS,
   IMPORT,
   IN,
+  INLINE,
   INSTANCEOF,
+  INT,
   INTERFACE,
   INTERNAL,
   IS,
+  LONG,
+  __NEAR,
   NEW,
   NULL,
   PACKAGE,
   PRIVATE,
   PROTECTED,
   PUBLIC,
+  REGISTER,
   RETURN,
+  SHORT,
+  SIGNED,
+  SIZEOF,
+  __STACK_NUMBER__,
+  STRUCT,
   SUPER,
   SWITCH,
   THIS,
   THROW,
   TRUE,
   TRY,
+  TYPEDEF,
   TYPEOF,
+  UNION,
+  UNSIGNED,
   USE,
+  __USER_LOCK__,
+  __USER_UNLOCK__,
   VAR,
   VOID,
+  VOLATILE,
   WHILE,
   WITH,
 
@@ -88,27 +113,27 @@ public enum FlexKeyword implements GrammarRuleKey {
 
   private final boolean syntactic;
 
-  FlexKeyword() {
+  CKeyword() {
     this(false);
   }
 
-  FlexKeyword(boolean syntactic) {
+  CKeyword(boolean syntactic) {
     this.syntactic = syntactic;
   }
 
   public static String[] keywordValues() {
-    String[] keywordsValue = new String[FlexKeyword.values().length];
+    String[] keywordsValue = new String[CKeyword.values().length];
     int i = 0;
-    for (FlexKeyword keyword : FlexKeyword.values()) {
+    for (CKeyword keyword : CKeyword.values()) {
       keywordsValue[i] = keyword.getValue();
       i++;
     }
     return keywordsValue;
   }
 
-  public static List<FlexKeyword> keywords() {
+  public static List<CKeyword> keywords() {
     return Collections.unmodifiableList(Arrays.stream(values())
-      .filter(flexKeyword -> !flexKeyword.syntactic)
+      .filter(CKeyword -> !CKeyword.syntactic)
       .collect(Collectors.toList()));
   }
 

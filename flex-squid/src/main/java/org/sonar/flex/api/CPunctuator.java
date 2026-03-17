@@ -19,7 +19,7 @@ package org.sonar.flex.api;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.TokenType;
 
-public enum FlexPunctuator implements TokenType {
+public enum CPunctuator implements TokenType {
   QUESTION("?"),
   LPAREN("("),
   RPAREN(")"),
@@ -46,16 +46,15 @@ public enum FlexPunctuator implements TokenType {
   MINUS_ASSIGN("-="),
   DEC("--"),
   STAR("*"),
-  // was replaced by grammar rule
-  // STAR_ASSIGN("*="),
+  STAR_ASSIGN("*="),
   MOD("%"),
   MOD_ASSIGN("%="),
+  ARROW("->"),
   SR(">>"),
   SR_ASSIGN(">>="),
   BSR(">>>"),
   BSR_ASSIGN(">>>="),
-  // was replaced by grammar rule
-  // GE(">="),
+  GE(">="),
   GT(">"),
   SL("<<"),
   SL_ASSIGN("<<="),
@@ -74,11 +73,14 @@ public enum FlexPunctuator implements TokenType {
   E4X_ATTRI("@"),
   SEMI(";"),
   DOT("."),
-  REST("...");
+  REST("..."),
+  HASH("#"),
+  HASHHASH("##"),
+  SIZEOF("sizeof");
 
   private final String value;
 
-  FlexPunctuator(String value) {
+  CPunctuator(String value) {
     this.value = value;
   }
 
